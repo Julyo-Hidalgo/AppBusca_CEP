@@ -50,6 +50,27 @@ namespace AppBusca_CEP.Service
             return listaBairro;
         }
 
+        public static async Task<List<CEP>> getCepByLogradouro(string logradouro)
+        {
+            List<CEP> listCep = new List<CEP>();
+
+            using (HttpClient client = new HttpClient())
+            {
+                HttpResponseMessage response = await client.GetAsync("https://cep.metoda.com.br/cep/by-logradouro?logradouro=" + logradouro);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string json = response.Content.ReadAsStringAsync().Result;
+
+                    listCep = JsonConvert.DeserializeObject<List<CEP>>(json);
+                }
+                else
+                    throw new Exception(response.RequestMessage.Content.ToString());
+            }
+
+            return listCep;
+        }
+
         public static async Task<List<Cidade>> getCidadeByUF(string uf)
         {
             List<Cidade> cidade = new List<Cidade>();

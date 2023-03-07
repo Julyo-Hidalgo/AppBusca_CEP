@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using AppBusca_CEP.View;
+using AppBusca_CEP;
 
 namespace AppBusca_CEP
 {
@@ -11,7 +12,7 @@ namespace AppBusca_CEP
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new View.BairrosPorCidade());
+            MainPage = new NavigationPage(new Menu());
         }
 
         protected override void OnStart()
